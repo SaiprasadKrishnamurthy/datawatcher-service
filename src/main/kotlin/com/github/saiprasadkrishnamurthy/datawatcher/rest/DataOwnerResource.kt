@@ -10,6 +10,7 @@ import com.github.saiprasadkrishnamurthy.datawatcher.model.PolicyKeyType
 import com.github.saiprasadkrishnamurthy.datawatcher.repository.LongPollersRepository
 import com.github.saiprasadkrishnamurthy.datawatcher.repository.PolicyDefinitionRepository
 import com.github.saiprasadkrishnamurthy.datawatcher.repository.PolicyKeyRepository
+import io.swagger.annotations.Api
 import org.apache.commons.codec.digest.DigestUtils
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
@@ -23,6 +24,7 @@ import java.util.concurrent.CompletableFuture
 /**
  * @author Sai.
  */
+@Api(tags = ["DATA OWNER"])
 @RequestMapping("/api/v1/")
 @RestController
 class DataOwnerResource(val policyEvaluationService: PolicyEvaluationService,
