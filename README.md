@@ -46,3 +46,8 @@ These rules are typically boolean expressions compliant to [JSONATA](https://jso
     "encryptMessage" : false,
 }
 ```
+
+## Prerequisites
+* Install [NATS](https://nats.io/)
+* Java/Maven
+* Needs MongoDB (change it to relevant DB in the application*.properties)
