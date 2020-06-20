@@ -6,7 +6,7 @@ import org.springframework.data.mongodb.core.mapping.Document
 import java.util.*
 
 enum class PolicyKeyType {
-    PolicyOwner, DataOwner
+    DataRequestor, DataOwner
 }
 
 @Document
@@ -24,7 +24,7 @@ data class PolicyDefinition(@Id val id: String = UUID.randomUUID().toString(),
                             val encryptMessage: Boolean = false)
 
 @Document
-data class PolicyKey(@Id val id: String = UUID.randomUUID().toString(), val policyId: String, val privateKey: String, val digest: String, val externalPublicKey: String, val selfPublicKey: String, val policyKeyType: PolicyKeyType = PolicyKeyType.PolicyOwner)
+data class PolicyKey(@Id val id: String = UUID.randomUUID().toString(), val policyId: String, val privateKey: String, val digest: String, val externalPublicKey: String, val selfPublicKey: String, val policyKeyType: PolicyKeyType = PolicyKeyType.DataRequestor)
 
 data class Rule(val name: String, val description: String, val expression: String, val score: Double)
 

@@ -27,7 +27,7 @@ class PolicyEvaluationResultListenerResource(val policyKeyRepository: PolicyKeyR
 
     @GetMapping("/watch/{policyId}", produces = [MediaType.APPLICATION_JSON_VALUE])
     fun watch(@PathVariable("policyId") policyId: String, @RequestParam("policyDigest") policyDigest: String): Any {
-        val policyKey = policyKeyRepository.findByPolicyIdAndPolicyKeyType(policyId.trim(), PolicyKeyType.PolicyOwner)!!
+        val policyKey = policyKeyRepository.findByPolicyIdAndPolicyKeyType(policyId.trim(), PolicyKeyType.DataRequestor)!!
         val digest = policyKey.digest
         if (digest != policyDigest) {
             return ResponseEntity(mapOf("error" to "Invalid Policy"), HttpStatus.BAD_REQUEST)
@@ -40,7 +40,7 @@ class PolicyEvaluationResultListenerResource(val policyKeyRepository: PolicyKeyR
 
     @GetMapping("/watch-websocket/{policyId}", produces = [MediaType.APPLICATION_JSON_VALUE])
     fun watchViaWebsocket(@PathVariable("policyId") policyId: String, @RequestParam("policyDigest") policyDigest: String): Any {
-        val policyKey = policyKeyRepository.findByPolicyIdAndPolicyKeyType(policyId.trim(), PolicyKeyType.PolicyOwner)!!
+        val policyKey = policyKeyRepository.findByPolicyIdAndPolicyKeyType(policyId.trim(), PolicyKeyType.DataRequestor)!!
         val digest = policyKey.digest
         if (digest != policyDigest) {
             return ResponseEntity(mapOf("error" to "Invalid Policy"), HttpStatus.BAD_REQUEST)

@@ -39,7 +39,7 @@ class PolicyResource(val policyDefinitionRepository: PolicyDefinitionRepository,
                 policyId = policyDefinition.id,
                 externalPublicKey = "",
                 selfPublicKey = policyDefinition.publicKey,
-                policyKeyType = PolicyKeyType.PolicyOwner)
+                policyKeyType = PolicyKeyType.DataRequestor)
         policyDefinitionRepository.save(policyDefinition)
         policyKeyRepository.save(policyKey)
         return ResponseEntity(mapOf("result" to "OK"), HttpStatus.OK)
@@ -47,7 +47,7 @@ class PolicyResource(val policyDefinitionRepository: PolicyDefinitionRepository,
 
     @PutMapping("policy/{policyId}/external-public-key", produces = [MediaType.APPLICATION_JSON_VALUE], consumes = [MediaType.TEXT_PLAIN_VALUE])
     fun updateExternalPublicKey(@PathVariable("policyId") policyId: String, @RequestBody key: String): ResponseEntity<*> {
-        val policyKey = policyKeyRepository.findByPolicyIdAndPolicyKeyType(policyId.trim(), PolicyKeyType.PolicyOwner)
+        val policyKey = policyKeyRepository.findByPolicyIdAndPolicyKeyType(policyId.trim(), PolicyKeyType.DataRequestor)
                 ?: return ResponseEntity(mapOf("error" to "Policy Not found with id: $policyId"), HttpStatus.BAD_REQUEST)
         val pk = policyKey.copy(externalPublicKey = key)
         policyKeyRepository.save(pk)

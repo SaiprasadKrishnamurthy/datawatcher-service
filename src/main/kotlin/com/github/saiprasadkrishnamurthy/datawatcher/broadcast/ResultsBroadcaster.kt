@@ -46,7 +46,7 @@ class ResultsBroadcaster(private val webSocketConfig: WebSocketConfig,
     }
 
     private fun verifySignature(policyEvaluationResult: PolicyEvaluationResult) {
-        val policyKey = policyKeyRepository.findByPolicyIdAndPolicyKeyType(policyId = policyEvaluationResult.policyId, policyKeyType = PolicyKeyType.PolicyOwner)
+        val policyKey = policyKeyRepository.findByPolicyIdAndPolicyKeyType(policyId = policyEvaluationResult.policyId, policyKeyType = PolicyKeyType.DataRequestor)
         if (policyKey != null) {
             val digest = policyKey.digest
             val externalPublicKey = policyKey.externalPublicKey
