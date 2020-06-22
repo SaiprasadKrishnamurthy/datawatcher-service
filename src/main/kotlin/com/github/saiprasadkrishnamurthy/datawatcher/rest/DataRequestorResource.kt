@@ -49,6 +49,12 @@ class DataRequestorResource(val policyKeyRepository: PolicyKeyRepository,
         return output
     }
 
+    @GetMapping("/policy/{policyId}", produces = [MediaType.APPLICATION_JSON_VALUE])
+    fun getPolicyById(@PathVariable("policyId") policyId: String) = policyDefinitionRepository.findById(policyId)
+
+    @GetMapping("/policies", produces = [MediaType.APPLICATION_JSON_VALUE])
+    fun getAllPolicies() = policyDefinitionRepository.findAll()
+
     @GetMapping("/watch-websocket/{policyId}", produces = [MediaType.APPLICATION_JSON_VALUE])
     fun watchViaWebsocket(@PathVariable("policyId") policyId: String, @RequestParam("policyDigest") policyDigest: String): Any {
         val policyKey = policyKeyRepository.findByPolicyIdAndPolicyKeyType(policyId.trim(), PolicyKeyType.DataRequestor)!!
